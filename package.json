@@ -1,0 +1,42 @@
+{
+  "name": "hackshield-inspector",
+  "displayName": "HackShield Inspector",
+  "description": "Real-time security analysis for your workstation, ensuring constant protection against vulnerabilities",
+  "publisher": "MohankumarRamachandran",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "hackshield-inspector.checkIfSystemIsHackable",
+        "title": "HackShield: Check if system is hackable"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "pnpm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.86.0",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "shell-quote": "^1.8.1"
+  }
+}
